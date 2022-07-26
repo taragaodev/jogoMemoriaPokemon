@@ -1,0 +1,225 @@
+@font-face {
+    font-family: Pokemon;
+    src: url(fonts/PokemonSolid.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{    
+    height: 100vh;
+    display: flex;    
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center;
+    background-color: #f44336;        
+}
+.game{    
+    display: flex;
+    flex-direction: column;
+    opacity: 20%;
+    transition: opacity .5s ease-in-out;
+    gap: 25px;
+}
+.game > img{
+    width: 100%;
+    margin: auto;    
+}
+
+.start{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;    
+    height: 100vh;        
+    background-color: #2772b944;
+    border: none;    
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 60px;
+    color: #c59f01;
+    margin: auto;
+    transform: scale(1);
+}
+.start:active{
+    transform: scale(.80);
+    transition: transform .1s;
+}
+
+.screen{    
+    position: absolute;
+    z-index: 9999;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 100%;  
+    height: 100vh;  
+    background-color: #375da9ce;
+    transition: z-index .3s ease;    
+}
+.inicio{
+    height: 100%;    
+}
+.start{
+    height: 100%;
+    overflow: hidden;
+}
+.start h1{        
+    font-size: 64px;
+    text-align: center;
+    font-family: Pokemon;
+    letter-spacing: 10px;
+    animation: pulando .3s infinite;
+    
+}
+.end{
+    visibility: hidden; 
+    position: absolute;    
+    z-index: -1;
+}
+.end > h1{
+    width: 100%;
+    font-size: 65px;
+    font-family: Pokemon;
+    text-align: center;
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 2px #000;    
+    color: #c59f01;    
+    position: absolute;  
+    top: 5%;      
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+.end > img{
+    position: absolute;
+    width: 550px;
+    left: 50%;    
+    transform: translateX(-50%);    
+}
+.end .cliques{
+    position: relative;    
+}
+/* ANIMAÇÃO DO TEXTO */
+@keyframes pulando {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(5px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+.memory-game{   
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    display: flex;    
+    flex-wrap: wrap; /* para descer quando não couber */
+    perspective: 1000px; /* PERSPECTIVA */
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    height: calc(25% - 10px);
+    width: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 2px 2px 2px #000;        
+    cursor: pointer;    
+    transform: scale(1); 
+    transform-style: preserve-3d; /* não deixa o elemento achatado no plano */   
+    transition: transform .9s;    
+}
+
+.card:active{
+    transform: scale(0.97);
+    transition: transform .3s;    
+}
+
+.card-front, 
+.card-back{    
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;       
+    position: absolute;
+    z-index: 0;
+    border-radius: 5px;
+    background: #fff;
+    backface-visibility: hidden; /* propriedade que retira o verso do elemento */
+}
+
+.card-front{
+    transform: rotateY(180deg);
+    background-size: contain;
+    background-position: center;    
+    padding: 10px;
+}
+.card-back{        
+    background-size: contain;        
+}
+
+
+/* ANIMAÇÃO DE FLIP */
+.card.flip{
+    transform: rotateY(180deg);
+}
+
+
+
+/* RESPONSIVO */
+
+@media (min-height: 1080px){      
+    .memory-game{
+        width: 650px !important;
+        height: 650px !important;
+    }
+    .end > h1{
+        font-size: 65px !important;
+    }
+    .end > img{
+        width: 550px !important;
+    }
+}
+@media (max-width: 915px) {
+    .memory-game{
+        width: 400px;
+        height: 400px;
+    }
+    .game > img {
+        width: 90% !important;
+    } 
+    .start > h1{
+        font-size: 35px;
+    }
+    .end > h1{
+        top: 5%;
+        font-size: 45px;        
+    }
+    .btn-shuffle{
+        bottom: 10%;
+    }
+    .end > img{
+        width: 400px;
+    }
+}
+@media (max-height: 812px) {
+    .memory-game{
+        width: 350px;
+        height: 350px;
+    }   
+}
+@media (max-height: 844px) {
+    .memory-game{
+        width: 350px;
+        height: 350px;
+    }   
+}
